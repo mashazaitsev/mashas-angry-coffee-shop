@@ -82,8 +82,6 @@ class Customer:
         
         self.targeted=False
     
-    #Used AI in moveToward to help me figure out how to make backtracking I originally 
-    #wrote faster, so that findPath wasn't called once at every step (extremely slow).
     def moveToward(self,player,app): #steps along the paths.
         if self.path is None or self.pathIndex>=len(self.path):
             self.path= self.findPath(app, self.cx, self.cy, player.cx, player.cy)
@@ -128,8 +126,7 @@ class Customer:
         visited={(startRow,startCol)}
         return self.passages(app,startRow,startCol,goalRow,goalCol,[],visited)
 
-    #Used AI in middle part of function 'passages' to help me figure out how to get customers to 
-    # ALWAYS try to get closer to the owner, with 'Manhattan distance' algorithm.
+    
     def passages(self,app,row,col,ownersRow,ownersCol,result,visited): #visited is a set.
         if (row,col)==(ownersRow,ownersCol): 
             return result + [(row,col)]
@@ -223,20 +220,16 @@ def onAppStart(app):
     app.boardHeight = app.cafeheight
     app.cellBorderWidth = 1
     
-    #I generated this image using Gemini.
     app.startUrl='cmu://1166394/46625098/coffee+shop+exterior.png'
     
-    #I generated this image using Gemini.
     app.heartUrl='cmu://1166394/46609409/heart.png'
     app.heartwidth=40
     app.heartheight=40
     
-    #I got the coffee image from a free download on Google.
     app.coffeeUrl='cmu://1166394/46622702/coffee+splash.png'
     app.coffeeSpeed=60
     app.throwRange=app.width/3
     
-    #I generated the images of the owner and all the customers using Gemini.
     app.ownerUrl='cmu://1166394/46609658/owner.png'
     app.customerUrls=['cmu://1166394/46609770/customer1.png',
     'cmu://1166394/46609773/customer7.png','cmu://1166394/46609782/customer2.png',
@@ -327,7 +320,6 @@ def start_onMousePress(app,mouseX,mouseY):
 def resetApp(app):
     app.health=app.maxHealth
     
-    #I generated the background using Gemini.
     app.url='cmu://1166394/46511145/Screenshot+2026-04-17+at+3.18.27 PM.png'
     app.round=1
     app.gameOver=False
@@ -340,8 +332,6 @@ def resetApp(app):
     
     app.coffees=[]
 
-#AI helped me figure out how to implement algorithm that makes a few customers spawn closer
-# and closer to owner with increasing rounds.
 def makeCustomers(app,count,speed): 
     walkableCells=[]
     for row in range(app.rows):
@@ -426,9 +416,6 @@ def game_onStep(app):
     if len(app.customers)==0:
         advanceRound(app)
 
-#AI helped me figure out how to make the coffees look like they're being thrown
-# through onMousePress, rather than the customers getting immediately killed
-# once you click on them.
 def game_onMousePress(app,mouseX,mouseY):
     if app.gameOver:
         return
