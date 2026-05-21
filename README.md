@@ -3,6 +3,9 @@
 A survival game where you play as a coffee shop owner being chased by angry customers.
 Click customers within throwing range to hit them with coffee. Survive 4 rounds to win!
 
+![Start Screen](images/start-screen.png)
+![Gameplay](images/gameplay.png)
+
 ## How to Play
 - Arrow keys to move
 - Click nearby customers to throw coffee at them
