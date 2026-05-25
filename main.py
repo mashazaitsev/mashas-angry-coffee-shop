@@ -2,44 +2,6 @@ from cmu_graphics import *
 import math
 import random
 
-'''
-Masha's Angry Coffee Shop:
-A survival game where you play as the coffee shop owner being chased by angry customers. 
-Click customers within throwing range to hit them with coffee. Survive 4 rounds of increasing 
-difficulty to win.
-
-Key Features:
-1) Backtracking pathfinding (Customer.findPath, Customer.passages)
-Every customer runs a recursive backtracking algorithm over the walkable grid to chase the player.
-Moves are sorted by Manhattan distance so customers head toward the player first, backtracking
-only if they are blocked. Customers remember their current path so the backtracking search doesn't
-rerun every frame (self.path, self.pathIndex) so the algorithm only reruns when a path is completed or
-invalidated. Without this feature, the game would hit a timeout at every frame.
-
-2) Custom walkable grid matching the visual background
-The cafe background is overlaid on a 15x16 grid with a hardcoded app.walkable list. Both the player
-and customers are constrained to walkable cells only, so no one walks through tables, counters or
-walls (with some exceptions to give customers and player enough space to move).
-
-3) Multi-screen app with a reusable Button class
-Start screen and game screen are handled through runAppWithScreens, with a Button class that stores
-(position,text,onClickFn) and handles its own click detection and drawing.
-
-4) Increasing difficulty across 4 rounds 
-Each round increases customer count and speed. With every round, more customers are allowed to spawn
-closer to the player, making evasion harder. Round 4 is the final boss round.
-
-5) Coffee projectile system with throw range
-Clicking a customer within throw-range spawns a Coffee object that tracks the customer's moving
-position in real time. The customer is only removed when the coffee actually reaches them.
-
-Grading Shortcut:
-Click 'START GAME' on the start screen to begin. During gameplay, click the 'Skip to final round'
-button (top-right) to jump directly to Round 4 with full difficulty and full health, so you can see the
-endgame state without playing through rounds 1-3.
-Press R at any time during gameplay to restart from Round 1.
-'''
-
 class Player:
     def __init__(self,startCx,startCy,radius,speed):
         self.startCx=startCx
